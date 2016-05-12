@@ -5,14 +5,17 @@
   "main": "main.js",
   "scripts": {
     "start": "./node_modules/.bin/electron  main.js",
-    "build": "babel src -d lib"
+    "build": "./node_modules/.bin/webpack",
+    "babel": "babel src -d lib"
   },
   "devDependencies": {
     "babel-cli": "^6.8.0",
     "babel-core": "^6.8.0",
+    "babel-loader": "^6.2.4",
     "electron-prebuilt": "^0.37.0",
     "react": "^15.0.2",
-    "react-dom": "^15.0.2"
+    "react-dom": "^15.0.2",
+    "webpack": "^1.13.0"
   },
   "dependencies": {
     "babel-preset-react": "^6.5.0"
