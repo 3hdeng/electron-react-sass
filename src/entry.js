@@ -7,7 +7,7 @@ var ReactDOM = require('react-dom');
 
 var App = React.createClass({
       render: function() {
-          return <h2>Hello from React!</h2>;
+          return <h2>Hello, webpack hot reload, 333 !</h2>;
                 }
 });
 
