@@ -1,7 +1,7 @@
-const moment= require('moment');
-const React= require('react');
+import React from 'react';
+import moment from 'moment';
 
-module.exports= class Header extends React.Component {
+export default class Header extends React.Component {
   render() {
     return (
       <header className="sd-header">

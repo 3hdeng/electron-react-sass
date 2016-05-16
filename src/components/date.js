@@ -1,10 +1,7 @@
-//import React from 'react';
-//import classnames from 'classnames';
+import React from 'react';
+import classnames from 'classnames';
 
-const React= require('react');
-const classnames= require('classnames');
-
-module.exports= class CalendarDate extends React.Component {
+export default class CalendarDate extends React.Component {
   render() {
     let date = this.props.date;
 

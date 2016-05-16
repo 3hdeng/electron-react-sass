@@ -1,24 +1,18 @@
-//import React from 'react/addons';
-//import moment from 'moment';
+import React from 'react'; ///addons';
+import moment from 'moment';
 
-//import Header from './header';
-//import Month from './month';
+import Header from './header';
+import Month from './month';
 
 //const {CSSTransitionGroup} = React.addons;
-const moment= require('moment');
-var Header= require('./header');
-var Month= require('./month');
+var CSSTransitionGroup = require('react-addons-css-transition-group');
 
-const React= require('react');
-const classnames= require('classnames');
-const CSSTransitionGroup = React.addons;
-
-module.exports= class Calendar extends React.Component {
+export default class Calendar extends React.Component {
   render() {
     return (
       <section className="sd-calendar">
         <Header {...this.props} />
-        <CSSTransitionGroup transitionName="month" component="div">
+        <CSSTransitionGroup transitionName="month" component="div" transitionEnterTimeout={500} transitionLeaveTimeout={300}>
           <Month {...this.props} key={this.props.month}/>
         </CSSTransitionGroup>
       </section>

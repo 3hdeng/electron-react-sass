@@ -1,92 +1,91 @@
-const React = require('react');///addons');
-const ReactDOM = require('react-dom');
+const React = require('react'); ///addons');
 const moment = require('moment');
 const _ = require('lodash');
 
-const CSSTransitionGroup = React.addons;
+//const {CSSTransitionGroup} = React.addons;
+var CSSTransitionGroup = require('react-addons-css-transition-group');
 
-//import Calendar from './calendar';
-var Calendar= require('./calendar');
+import Calendar from './calendar';
 
-module.exports= class Datepicker extends React.Component {
-  constructor(props) {
-    super(props);
-    let date = moment();
-    let month = date.month();
-    let year = date.year();
+export default class Datepicker extends React.Component {
+    constructor(props) {
+        super(props);
+        let date = moment();
+        let month = date.month();
+        let year = date.year();
 
-    this.state = {
-      month,
-      year,
-      date,
-      dates: this._getDates(month, year),
-      open: false
-    };
-  }
-
-  _getDates(month, year) {
-    let firstDate = moment([year, month]).weekday(0);
-
-    let dates = _.range(42).map((val, index) => {
-      return firstDate.clone().add(index, 'd');
-    });
-
-    return dates;
-  }
-
-  _updateMonth(month) {
-    let year = this.state.year;
-
-    if (month >= 12) {
-      year++;
-      month %= 12;
-    } else if (month < 0) {
-      year--;
-      month = 12 + month;
+        this.state = {
+            month,
+            year,
+            date,
+            dates: this._getDates(month, year),
+            open: false
+        };
     }
 
-    this.setState({
-      month,
-      year,
-      dates: this._getDates(month, year)
-    });
-  }
+    _getDates(month, year) {
+        let firstDate = moment([year, month]).weekday(0);
 
-  _updateDate(date) {
-    this.setState({ date, open: false });
-  }
+        let dates = _.range(42).map((val, index) => {
+            return firstDate.clone().add(index, 'd');
+        });
 
-  _updateYear(year) {
-    this.setState({ year });
-  }
+        return dates;
+    }
 
-  _open() {
-    this.setState({ open: true });
-  }
+    _updateMonth(month) {
+        let year = this.state.year;
 
-  render() {
-    let calendar = this.state.open ? (
-      <Calendar month={this.state.month}
-        year={this.state.year}
-        dates={this.state.dates}
-        updateMonth={this._updateMonth.bind(this)}
-        updateDate={this._updateDate.bind(this)}
-        key="1" />
-      ) : null;
+        if (month >= 12) {
+            year++;
+            month %= 12;
+        } else if (month < 0) {
+            year--;
+            month = 12 + month;
+        }
 
-    return (
-      <div className="sd-datepicker">
-        <input className="sd-input"
-          type="text"
-          value={this.state.date.format('MM/DD/YYYY')}
-          readOnly
-          onClick={this._open.bind(this)}/>
+        this.setState({
+            month,
+            year,
+            dates: this._getDates(month, year)
+        });
+    }
+
+    _updateDate(date) {
+        this.setState({ date, open: false });
+    }
+
+    _updateYear(year) {
+        this.setState({ year });
+    }
+
+    _open() {
+        this.setState({ open: true });
+    }
+
+    render() {
+        let calendar = this.state.open ? (
+                <Calendar month={this.state.month}
+                year={this.state.year}
+                dates={this.state.dates}
+                updateMonth={this._updateMonth.bind(this)}
+                updateDate={this._updateDate.bind(this)}
+                key="1" />
+                ) : null;
+
+        return (
+                <div className="sd-datepicker">
+                <input className="sd-input"
+                type="text"
+                value={this.state.date.format('MM/DD/YYYY')}
+                readOnly
+                onClick={this._open.bind(this)}/>
 
 
-        <CSSTransitionGroup transitionName="calendar">
-          {calendar}
-        </CSSTransitionGroup>
-      </div>
-    );
-  }
+                <CSSTransitionGroup transitionName="calendar" transitionEnterTimeout={500} transitionLeaveTimeout={300}>
+                {calendar}
+                </CSSTransitionGroup>
+                </div>
+               );
+    }
 }
