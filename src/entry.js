@@ -1,4 +1,7 @@
 // entry.js
+require('../static/sass/main.scss');
+
+
 var React = require('react');
 var ReactDOM = require('react-dom');
 
