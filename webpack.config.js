@@ -3,22 +3,29 @@ var webpack = require('webpack');
 var path= require('path');
 
 module.exports = {
-    context: __dirname + '/src',
-    entry: './entry.js',
+    context: path.join(__dirname, 'src'),
+    /*entry: './entry.js',
 
+      output: {
+      filename: 'bundle.js',
+      path: __dirname + '/build',
+      publicPath: 'http://localhost:8080/build/'
+      },*/
+    entry: './index.js',
     output: {
-        filename: 'bundle.js',
-        path: __dirname + '/build',
-         publicPath: 'http://localhost:8080/build/'
+        path: './dist',
+        filename: 'datepicker.js'
     },
+
 
     module: {
         loaders: [
-        { test: /\.js$/, loader: 'babel-loader', exclude: /node_modules/ }
+        { test: /\.js$/, loader: 'babel-loader', exclude: /node_modules/ },
+        { test: /\.scss$/, loader: 'style-loader!css-loader!sass-loader' }
         ]
     },
     resolveLoader: {
-          root: path.join(__dirname, 'node_modules')
+        root: path.join(__dirname, 'node_modules')
     }
 
 };
